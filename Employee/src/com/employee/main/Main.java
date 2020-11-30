@@ -47,7 +47,8 @@ public class Main {
 			
 		}
 		
-		///Print
+		//Print
+		System.out.println("\nPayments: ");
 		for(Employee x : listEmployee) {
 			System.out.println(x.toString());
 		}

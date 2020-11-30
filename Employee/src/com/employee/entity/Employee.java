@@ -43,6 +43,6 @@ public class Employee {
 	}
 	
 	public String toString() {
-		return getName()+" - $"+payment();
+		return getName()+" - $"+String.format("%.2f", payment());
 	}
 }
