@@ -19,9 +19,7 @@ public class OutsourcedEmployee extends Employee{
 	
 	@Override
 	public Double payment() {
-		Double result = 0.00,soma = 0.00;
-		soma = getAdditionalCharge()*0.10;
-		result += getAdditionalCharge()+soma;
-		return super.payment()+result;
+		
+		return super.payment()+getAdditionalCharge() * 1.1;
 	}
 }
