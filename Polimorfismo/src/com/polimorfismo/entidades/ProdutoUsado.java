@@ -10,4 +10,17 @@ public class ProdutoUsado extends Produto{
 		super(nome, preco);
 		this.dadosFabricacao = dadosFabricacao;
 	}
+
+	public Date getDadosFabricacao() {
+		return dadosFabricacao;
+	}
+
+	public void setDadosFabricacao(Date dadosFabricacao) {
+		this.dadosFabricacao = dadosFabricacao;
+	}
+	
+	@Override
+	public String precoTag() {
+		return super.precoTag()+" ("+getDadosFabricacao()+")";
+	}
 }

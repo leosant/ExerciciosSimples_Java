@@ -16,4 +16,9 @@ public class ProdutoImportado extends Produto{
 	public void setTaxaAlfandega(Double taxaAlfandega) {
 		this.taxaAlfandega = taxaAlfandega;
 	}
+	
+	@Override
+	public String precoTag() {
+		return super.precoTag()+" (Taxa Alfandegária $"+getTaxaAlfandega()+")";
+	}
 }

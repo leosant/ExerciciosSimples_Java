@@ -1,7 +1,10 @@
 package com.polimorfismo.entidades;
 
+import com.polimorfismo.enums.TagProduto;
+
 public class Produto {
 	
+	private TagProduto tagProduto;
 	private String nome;
 	private double preco;
 	
@@ -9,6 +12,14 @@ public class Produto {
 		super();
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	public TagProduto getTagProduto() {
+		return tagProduto;
+	}
+
+	public void setTagProduto(TagProduto tagProduto) {
+		this.tagProduto = tagProduto;
 	}
 
 	public String getNome() {
@@ -25,5 +36,9 @@ public class Produto {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+	
+	public String precoTag() {
+		return getNome()+" ("+getTagProduto()+") $ "+getPreco();
 	}
 }
