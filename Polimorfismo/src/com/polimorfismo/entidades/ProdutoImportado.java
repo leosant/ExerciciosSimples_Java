@@ -1,11 +1,13 @@
 package com.polimorfismo.entidades;
 
+import com.polimorfismo.enums.TagProduto;
+
 public class ProdutoImportado extends Produto{
 	
 	private Double taxaAlfandega;
 	
-	public ProdutoImportado(String nome, double preco, Double taxaAlfandega) {
-		super(nome, preco);
+	public ProdutoImportado(String nome, double preco, TagProduto tagProduto, Double taxaAlfandega) {
+		super(nome, preco, tagProduto);
 		this.taxaAlfandega = taxaAlfandega;
 	}
 

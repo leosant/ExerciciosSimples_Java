@@ -6,12 +6,13 @@ public class Produto {
 	
 	private TagProduto tagProduto;
 	private String nome;
-	private double preco;
+	private Double preco;
 	
-	public Produto(String nome, double preco) {
+	public Produto(String nome, Double preco, TagProduto tagProduto) {
 		super();
 		this.nome = nome;
 		this.preco = preco;
+		this.tagProduto = tagProduto;
 	}
 	
 	public TagProduto getTagProduto() {
