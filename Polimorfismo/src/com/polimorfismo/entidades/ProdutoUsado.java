@@ -1,11 +1,13 @@
 package com.polimorfismo.entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.polimorfismo.enums.TagProduto;
 
 public class ProdutoUsado extends Produto{
 
+	public static SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 	private Date dadosFabricacao;
 	
 	public ProdutoUsado(String nome, double preco, TagProduto tagProduto, Date dadosFabricacao) {
@@ -23,6 +25,6 @@ public class ProdutoUsado extends Produto{
 	
 	@Override
 	public String precoTag() {
-		return super.precoTag()+" ("+getDadosFabricacao()+")";
+		return super.precoTag()+" (Data de Fabricação data: "+format.format(getDadosFabricacao())+")";
 	}
 }
