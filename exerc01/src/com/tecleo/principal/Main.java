@@ -46,7 +46,7 @@ public class Main {
 		
 		trabalhador = new Trabalhador(nome, WorkerLevel.valueOf(level), baseSalary, new Departamento(dep));
 		
-		System.out.println("Quantos contratos com o funcionário "+nome+": ");
+		System.out.println("Quantos contratos com o funcionï¿½rio "+nome+": ");
 		int numCont = teclado.nextInt();
 		
 		for(int i = 0 ; i < numCont; i++) {
@@ -55,19 +55,19 @@ public class Main {
 			Date dataContrato = format.parse(teclado.next());
 			System.out.println("Valor por hora: ");
 			double valuePerHour = teclado.nextDouble();
-			System.out.println("Duração (Horas): ");
+			System.out.println("Duraï¿½ï¿½o (Horas): ");
 			int hours = teclado.nextInt();
 			HorasContrato contratoHours = new HorasContrato(dataContrato, valuePerHour, hours);
 			trabalhador.addContract(contratoHours);
 		}
 		System.out.println();
-		System.out.println("Entre com o mês e ano a ser calculado: ");
+		System.out.println("Entre com o mï¿½s e ano a ser calculado: ");
 		String monthAndYear = teclado.next();
 		int month = Integer.parseInt(monthAndYear.substring(0, 2));
 		int year = Integer.parseInt(monthAndYear.substring(3));
 		System.out.println("Nome: "+trabalhador.getNome());
 		System.out.println("Departamento: "+trabalhador.getDepartamento().getNome());
-		System.out.println("Nível: "+trabalhador.getLevel());
+		System.out.println("NÃ­vel: "+trabalhador.getLevel());
 		System.out.println("Total no "+monthAndYear+": "+trabalhador.totalGanho(year, month));
 	}
 
