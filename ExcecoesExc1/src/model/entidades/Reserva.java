@@ -1,12 +1,14 @@
-package com.model.entidades;
+package model.entidades;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import model.excecao.DominioExcecao;
+
 public class Reserva {
 	
-	private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+	public static SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 	
 	private Integer numQuarto;
 	private Date checkin;
@@ -46,17 +48,30 @@ public class Reserva {
 	
 	//Calculo e conversão de milisegundos para dias
 	public Long duracao() {
+		
 		Long resultadoMili = getCheckout().getTime() - getCheckin().getTime();
 		Long resultadoDia = TimeUnit.DAYS.convert(resultadoMili, TimeUnit.MILLISECONDS);
 		
-		if(resultadoDia < 0) {
-			resultadoDia = null;
-		}
+//		if(resultadoDia < 0) {
+//			resultadoDia = null;
+//		}
 		return resultadoDia;
 	}
 	
-	public void atulizarDatas(Date checkin, Date checkout) {
-		setCheckin(checkin);
-		setCheckout(checkout);
+	public void atulizarDatas(Date checkin, Date checkout) throws DominioExcecao{
+		
+		Date dataAgora = new Date();
+		
+		if(checkin.before(dataAgora) || checkout.before(dataAgora)) {
+			throw new DominioExcecao("Registro impossível.\nO programa só reconhece datas futuras!");
+		}else if(!checkout.after(checkin)) {
+			throw new DominioExcecao("Registro impossível.\nA data de entrada não pode ser inferior a data "
+					+ "de saída");
+		}
+		else {
+			setCheckin(checkin);
+			setCheckout(checkout);
+		}
+		
 	}
 }
