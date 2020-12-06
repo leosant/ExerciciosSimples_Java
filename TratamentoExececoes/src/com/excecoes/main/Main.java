@@ -9,22 +9,17 @@ public class Main {
 		//A intenção desse projeto é pode causa erros, e trata-los
 		
 		Scanner teclado = new Scanner(System.in);
-		Integer[] num = null;
 		
 		try {
 			for(int i = 0; i < 1; i++) {
 				System.out.println("Digite o nome desejado: ");
-				num[i] = teclado.nextInt();
+				String[] nomes = teclado.nextLine().split(" ");
+				int pos = teclado.nextInt();
+				System.out.println("Acessando: "+nomes[pos]);
 			}
 		} catch (Exception e) {
-			System.out.println("Parei por causa de ponto nulo");
-		}
-		try {
-			for(int i = 0; i < 1; i++) {
-				System.out.println("\n"+num[i]);
-			}
-		} catch (Exception e) {
-			System.out.println("Ponto de NullPointerException");
+			//Especifica e trilha a exceção causada
+			e.printStackTrace();
 		}
 		
 		System.out.println("Fim");
