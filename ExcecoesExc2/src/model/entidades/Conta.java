@@ -1,5 +1,7 @@
 package model.entidades;
 
+import model.exceptions.ExceptionApp;
+
 public class Conta {
 	
 	private Integer numConta;
@@ -45,15 +47,15 @@ public class Conta {
 		System.out.println("Valor Total: "+getDeposito());
 	}
 	
-	public void saque(Double montante) {
+	public void saque(Double montante) throws ExceptionApp{
 		
 		if(getLimite() < montante) {
-			if(getDeposito() < montante) {
-				System.out.println("Valor insuficiente!");
-			}
-		}else {
-			setDeposito(getDeposito()-montante);
-			System.out.println("Valor restante: "+(getDeposito()));
+			throw new ExceptionApp("Limite de saque não autorizado");
 		}
+		if(getDeposito() < montante) {
+			throw new ExceptionApp("Saldo em conta insuficiente!");
+		}
+			setDeposito(getDeposito()-montante);
+			getDeposito();
 	}
 }
