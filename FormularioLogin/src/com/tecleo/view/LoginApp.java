@@ -2,7 +2,11 @@ package com.tecleo.view;
 
 
 
+import javax.swing.JOptionPane;
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,60 +17,119 @@ import javafx.stage.Stage;
 
 public class LoginApp extends Application{
 
+	
+	private AnchorPane pane;
+	private Label lblLogin, lblSenha;
+	private TextField txtLogin;
+	private PasswordField txtSenha;
+	private Button btEntrar, btSair;
+	private static Stage stage;
+
 	public static void main(String [] args) {
-		
+
 		launch(args);
-		
+
 	}
-	
-	
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		AnchorPane pane = new AnchorPane();
-		pane.setPrefSize(400, 300);
+		initComponents();
+		initLayout();
+		initListeners();
 		
 		Scene scene = new Scene(pane);
 		
-		primaryStage.setScene(scene);
-		
+		primaryStage.setScene(scene);		
+		primaryStage.setResizable(false);
+		primaryStage.setTitle("Login - GOLFX");
 		primaryStage.show();
+	
+		LoginApp.stage = primaryStage;
 		
-		//Criando componentes
-		Label lblLogin = new Label();
+	}
+
+
+
+
+
+
+	private void initComponents() {
+
+		pane = new AnchorPane();
+		pane.setPrefSize(400, 300);
+		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,"
+				+ " blue 0%, silver 100%);");
+
+
+		lblLogin = new Label();
 		lblLogin.setText("Login: ");
-		lblLogin.setLayoutX((320 - lblLogin.getWidth())/2);
-		lblLogin.setLayoutY(55);
-		
-		TextField txtLogin = new TextField();
+
+		txtLogin = new TextField();
 		txtLogin.setPromptText("Digite aqui seu login");
-		txtLogin.setLayoutX((pane.getWidth() - txtLogin.getWidth())/2);
-		txtLogin.setLayoutY(50);
-		
-		Label lblSenha = new Label();
+
+		lblSenha = new Label();
 		lblSenha.setText("Senha: ");
-		lblSenha.setLayoutX((320 - lblSenha.getWidth())/2);
+		
+		txtSenha = new PasswordField();
+		txtSenha.setPromptText("Digite aqui sua senha");
+
+		btEntrar = new Button("Entrar");
+
+		btSair = new Button("Sair");
+	}
+
+	private void initLayout() {
+
+		lblLogin.setLayoutX(110);
+		lblLogin.setLayoutY(55);
+
+		txtLogin.setLayoutX(150);
+		txtLogin.setLayoutY(50);
+
+		lblSenha.setLayoutX(110);
 		lblSenha.setLayoutY(85);
 		
-		PasswordField txtSenha = new PasswordField();
-		txtSenha.setPromptText("Digite aqui sua senha");
-		txtSenha.setLayoutX((pane.getWidth() - txtLogin.getWidth())/2);
+		txtSenha.setLayoutX(150);
 		txtSenha.setLayoutY(80);
-		
-		Button btEntrar = new Button("Entrar");
-		btEntrar.setLayoutX((pane.getWidth() - btEntrar.getWidth())/2);
+
+		btEntrar.setLayoutX(150);
 		btEntrar.setLayoutY(150);
-		
-		Button btSair = new Button("Sair");
+
 		btSair.setLayoutX(btEntrar.getLayoutX() + 65);
 		btSair.setLayoutY(150);
-		
-		//Style
-		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, blue 0%, silver 100%);");
-		
 		
 		pane.getChildren().addAll(lblLogin, txtLogin, lblSenha, txtSenha, btEntrar, btSair);
 	}
 
+	private void initListeners() {
+		btSair.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				fecharAplicacao();
+			}
+		});
+
+		btEntrar.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				logar();
+			}
+		});
+	}
+
+	//Metodos particulares
+	public Stage getStage() {
+		return stage;
+	}
+
+	private void fecharAplicacao() {
+		System.exit(0);
+	}
+
+	private void logar() {
+		if(txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin")) {
+			//TODO Abrir a tela VitrineApp
+		}else {
+			JOptionPane.showMessageDialog(null, "Login e/ou senha inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }
