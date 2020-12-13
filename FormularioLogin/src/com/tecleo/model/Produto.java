@@ -3,9 +3,9 @@ package com.tecleo.model;
 public class Produto {
 	
 	private String produto;
-	private Double preco;
+	private double preco;
 	
-	public Produto(String produto, Double preco) {
+	public Produto(String produto, double preco) {
 		this.produto = produto;
 		this.preco = preco;
 	}
@@ -18,11 +18,11 @@ public class Produto {
 		this.produto = produto;
 	}
 
-	public Double getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(Double preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 	
