@@ -55,21 +55,25 @@ public class VitrineApp extends Application {
 		
 		pane = new AnchorPane();
 		pane.setPrefSize(800, 600);
+		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,"
+				+ " blue 0%, silver 100%);");
 		
 		txPesquisa = new TextField();
 		txPesquisa.setPromptText("Digite o item para pesquisa");
 		
 		tbVitrine = new TableView<ItensProperty>();
-		tbVitrine.setPrefSize(700, 550);
+		tbVitrine.setPrefSize(780, 550);
 		
-		columnProduto = new TableColumn<ItensProperty, String>();
-		columnPreco = new TableColumn<ItensProperty, Double>();
-		tbVitrine.getColumns().addAll(columnProduto, columnPreco);
+		columnProduto = new TableColumn<ItensProperty, String>("Produto");
+		columnPreco = new TableColumn<ItensProperty, Double>("Preço");
 		
 		columnProduto.setCellValueFactory(
 				new PropertyValueFactory<ItensProperty, String>("Produto"));
 		columnPreco.setCellValueFactory(
 				new PropertyValueFactory<ItensProperty, Double>("Preço"));
+		
+		tbVitrine.getColumns().addAll(columnProduto, columnPreco);
+		
 		
 		pane.getChildren().addAll(txPesquisa, tbVitrine);
 		
@@ -78,8 +82,10 @@ public class VitrineApp extends Application {
 	
 	private void initLayout() { 
 		
-		txPesquisa.setLayoutX(550);
+		txPesquisa.setLayoutX(600);
 		
+		tbVitrine.setLayoutX(10);
+		tbVitrine.setLayoutY(25);
 		
 	}
 	
@@ -93,11 +99,11 @@ public class VitrineApp extends Application {
 		for(Produto p : v.getProdutos()) {
 			listItens.add(new ItensProperty(p.getProduto(), p.getPreco()));
 		}
-		
 		tbVitrine.setItems(listItens);
 	}
 	
 	private ObservableList<ItensProperty> findItems() {
+		
 		ObservableList<ItensProperty> itensEncontrados = FXCollections.observableArrayList();
 		
 		for(ItensProperty itens : listItens) {
