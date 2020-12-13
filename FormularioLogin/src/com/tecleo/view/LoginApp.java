@@ -77,6 +77,8 @@ public class LoginApp extends Application{
 		btEntrar = new Button("Entrar");
 
 		btSair = new Button("Sair");
+		
+		pane.getChildren().addAll(lblLogin, txtLogin, lblSenha, txtSenha, btEntrar, btSair);
 	}
 
 	private void initLayout() {
@@ -99,7 +101,7 @@ public class LoginApp extends Application{
 		btSair.setLayoutX(btEntrar.getLayoutX() + 65);
 		btSair.setLayoutY(150);
 		
-		pane.getChildren().addAll(lblLogin, txtLogin, lblSenha, txtSenha, btEntrar, btSair);
+		
 	}
 
 	private void initListeners() {
@@ -117,7 +119,7 @@ public class LoginApp extends Application{
 	}
 
 	//Metodos particulares
-	public Stage getStage() {
+	public static Stage getStage() {
 		return stage;
 	}
 
@@ -127,7 +129,12 @@ public class LoginApp extends Application{
 
 	private void logar() {
 		if(txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin")) {
-			//TODO Abrir a tela VitrineApp
+			try {
+				new VitrineApp().start(new Stage());
+				LoginApp.getStage().close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else {
 			JOptionPane.showMessageDialog(null, "Login e/ou senha inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
