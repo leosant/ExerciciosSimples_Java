@@ -77,7 +77,10 @@ public class VitrineApp extends Application {
 	}
 	
 	private void initLayout() { 
+		
 		txPesquisa.setLayoutX(550);
+		
+		
 	}
 	
 	private void initItens() {
