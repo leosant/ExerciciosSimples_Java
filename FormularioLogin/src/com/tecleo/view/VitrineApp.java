@@ -29,6 +29,16 @@ public class VitrineApp extends Application {
 	private static ObservableList<ItensProperty> listItens = FXCollections
 			.observableArrayList();
 	private static Carrinho carrinho;
+	
+	public static void memoriaConsumida() {
+		
+		final int MB = 1024 * 1024;
+		
+		Runtime runtime = Runtime.getRuntime();
+		
+		System.out.println((runtime.totalMemory() - runtime.freeMemory())/MB);
+		
+	}
 
 	public class ItensProperty {
 
@@ -64,6 +74,8 @@ public class VitrineApp extends Application {
 
 	@Override
 	public void start(Stage stageVitrine) throws Exception {
+		System.out.println("Inicio");
+		memoriaConsumida();
 		
 		initComponents();
 		initLayout();
@@ -76,6 +88,11 @@ public class VitrineApp extends Application {
 		stageVitrine.setResizable(true);
 		stageVitrine.setTitle("Vitrine - GOLFX");
 		stageVitrine.show();
+		System.out.println("Final");
+		
+		Runtime.getRuntime().runFinalization();
+		Runtime.getRuntime().gc();
+		memoriaConsumida();
 	}
 
 
