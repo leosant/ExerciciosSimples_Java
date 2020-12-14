@@ -9,7 +9,7 @@ public class Vitrine {
 	
 private static List<Produto> produtos = new ArrayList<Produto>();
 	
-	public void addProdutors(Produto... ps) {
+	public void addProdutos(Produto... ps) {
 		for(Produto p : ps) {
 			produtos.add(p);
 		}

@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class VitrineApp extends Application {
-
+	private static Stage stage;
 	private AnchorPane pane;
 	private TextField txPesquisa;
 	private TableView<ItensProperty> tbVitrine;
@@ -29,19 +29,95 @@ public class VitrineApp extends Application {
 	private static ObservableList<ItensProperty> listItens = FXCollections
 			.observableArrayList();
 	private static Carrinho carrinho;
-	
+
 	public static void memoriaConsumida() {
-		
+
 		final int MB = 1024 * 1024;
-		
+
 		Runtime runtime = Runtime.getRuntime();
-		
+
 		System.out.println((runtime.totalMemory() - runtime.freeMemory())/MB);
-		
+
+	}
+
+	public static void main(String[] args) {
+
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage stageVitrine) throws Exception {
+		System.out.println("Inicio");
+		memoriaConsumida();
+
+		initComponents();
+		initListeners();
+		initItens();
+
+		Scene scene = new Scene(pane);
+		stageVitrine.setScene(scene);
+
+		stageVitrine.show();
+		initLayout();
+		VitrineApp.stage = stageVitrine;
+
+		Runtime.getRuntime().runFinalization();
+		Runtime.getRuntime().gc();
+		memoriaConsumida();
+	}
+
+	private void initComponents() {
+
+		pane = new AnchorPane();
+		pane.setPrefSize(800, 600);
+		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,"
+				+ " blue 0%, silver 100%);");
+
+		txPesquisa = new TextField();
+		txPesquisa.setPromptText("Digite o item para pesquisa");
+
+		tbVitrine = new TableView<ItensProperty>();
+		tbVitrine.setPrefSize(780, 550);
+		tbVitrine.setItems(listItens);
+
+		columnProduto = new TableColumn<ItensProperty, String>("Produto");
+		columnPreco = new TableColumn<ItensProperty, Double>("Preço");
+
+		tbVitrine.getColumns().addAll(columnProduto, columnPreco);
+
+		pane.getChildren().addAll(txPesquisa, tbVitrine);
+
+		columnProduto.setCellValueFactory(
+				new PropertyValueFactory<ItensProperty, String>("produto"));
+		columnPreco.setCellValueFactory(
+				new PropertyValueFactory<ItensProperty, Double>("preco"));
+
+		carrinho = new Carrinho();
+	}
+
+	private void initLayout() { 
+
+		txPesquisa.setLayoutX(600);
+
+		tbVitrine.setLayoutX(10);
+		tbVitrine.setLayoutY(25);
+
+	}
+
+	private void initItens() {
+
+		Vitrine v = new Vitrine();
+
+		v.addProdutos(new Produto("Bola Topper", 15.00), new Produto("Luvas Umbro", 9.00),
+				new Produto("Camisa Esportiva", 40.00), new Produto("Chuteira Nike Mercurial", 199.00),
+				new  Produto("Caneleira Topper", 10.00));
+
+		for(Produto p : v.getProdutos()) {
+			listItens.add(new ItensProperty(p.getProduto(), p.getPreco()));
+		}
 	}
 
 	public class ItensProperty {
-
 		private SimpleStringProperty produto;
 		private SimpleDoubleProperty preco;
 
@@ -59,93 +135,14 @@ public class VitrineApp extends Application {
 		}
 
 		public double getPreco() {
+			System.out.println("ItensProperty de preco");
 			return preco.get();
 		}
 
 		public void setPreco(double preco) {
 			this.preco.set(preco);
 		}
-	}
 
-	public static void main(String[] args) {
-
-		launch(args);
-	}
-
-	@Override
-	public void start(Stage stageVitrine) throws Exception {
-		System.out.println("Inicio");
-		memoriaConsumida();
-		
-		initComponents();
-		initLayout();
-		initItens();
-		initListeners();
-
-		Scene scene = new Scene(pane);
-
-		stageVitrine.setScene(scene);
-		stageVitrine.setResizable(true);
-		stageVitrine.setTitle("Vitrine - GOLFX");
-		stageVitrine.show();
-		System.out.println("Final");
-		
-		Runtime.getRuntime().runFinalization();
-		Runtime.getRuntime().gc();
-		memoriaConsumida();
-	}
-
-
-	
-	private void initComponents() {
-
-		pane = new AnchorPane();
-		pane.setPrefSize(800, 600);
-		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,"
-				+ " blue 0%, silver 100%);");
-
-		txPesquisa = new TextField();
-		txPesquisa.setPromptText("Digite o item para pesquisa");
-
-		tbVitrine = new TableView<ItensProperty>();
-		tbVitrine.setPrefSize(780, 550);
-
-		columnProduto = new TableColumn<ItensProperty, String>("Produto");
-		columnPreco = new TableColumn<ItensProperty, Double>("Preço");
-
-		columnProduto.setCellValueFactory(
-				new PropertyValueFactory<ItensProperty, String>("Produto"));
-		columnPreco.setCellValueFactory(
-				new PropertyValueFactory<ItensProperty, Double>("Preço"));
-
-		tbVitrine.getColumns().addAll(columnProduto, columnPreco);
-
-
-		pane.getChildren().addAll(txPesquisa, tbVitrine);
-
-		carrinho = new Carrinho();
-	}
-
-	private void initLayout() { 
-
-		txPesquisa.setLayoutX(600);
-
-		tbVitrine.setLayoutX(10);
-		tbVitrine.setLayoutY(25);
-
-	}
-
-	private void initItens() {
-
-		Vitrine v = new Vitrine();
-		v.addProdutors(new Produto("Bola Topper", 15.00), new Produto("Luvas Umbro", 9.00),
-				new Produto("Camisa Esportiva", 40.00), new Produto("Chuteira Nike Mercurial", 199.00),
-				new  Produto("Caneleira Topper", 10.00));
-
-		for(Produto p : v.getProdutos()) {
-			listItens.add(new ItensProperty(p.getProduto(), p.getPreco()));
-		}
-		tbVitrine.setItems(listItens);
 	}
 
 	private ObservableList<ItensProperty> findItems() {
@@ -172,7 +169,5 @@ public class VitrineApp extends Application {
 				}
 			}
 		});
-
-
 	}
 }

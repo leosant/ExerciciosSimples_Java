@@ -19,7 +19,7 @@ public class Produto {
 	}
 
 	public double getPreco() {
-		return preco;
+		return preco;	
 	}
 
 	public void setPreco(double preco) {
