@@ -194,5 +194,17 @@ public class VitrineApp extends Application {
 				}
 			}
 		});	
+		
+		
 	}
+
+	public static Carrinho getCarrinho() {
+		return carrinho;
+	}
+
+	public static void setCarrinho(Carrinho carrinho) {
+		VitrineApp.carrinho = carrinho;
+	}
+	
+	
 }

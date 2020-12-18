@@ -3,6 +3,8 @@ package com.tecleo.view;
 import com.tecleo.model.Produto;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -47,14 +49,43 @@ public class ItemApp extends Application{
 		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%," 
 				+ " blue 0%, silver 100%)");
 		
+		lbDescricao = new Label(produto.getProduto());
+		lbPreco = new Label("Preço: "+produto.getPreco());
+		
+		btAddCarrinho = new Button("Adicionar ao Carrinho");
+		
 		imgItem = new ImageView(new Image(images[index], 213, 213, false, false));
 		
-		pane.getChildren().addAll(imgItem);
+		pane.getChildren().addAll(imgItem, lbDescricao, lbPreco, btAddCarrinho);
 	}
 	
 	private void initLayout() { 
+		
 		imgItem.setLayoutX(10);
 		imgItem.setLayoutY(10);
+		btAddCarrinho.setLayoutX((pane.getWidth() - btAddCarrinho.getWidth()) / 2);
+		btAddCarrinho.setLayoutY(200);
+		lbDescricao.setLayoutX((pane.getWidth() - lbDescricao.getWidth()) / 2);
+		lbDescricao.setLayoutY(100);
+		lbPreco.setLayoutX((pane.getWidth() - lbPreco.getWidth()) / 2);
+		lbPreco.setLayoutY(150);
+		
+	}
+	
+	private void initListeners() {
+		
+		btAddCarrinho.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				VitrineApp.getCarrinho().addProdutors(produto);
+				try {
+					new CarrinhoApp().start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
 	}
 	
 	public static Produto getProduto() {
