@@ -58,8 +58,8 @@ public class LoginApp extends Application{
 
 		pane = new AnchorPane();
 		pane.setPrefSize(400, 300);
-		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,"
-				+ " blue 0%, silver 100%);");
+		pane.setStyle("-fx-background-color: linear-gradient(to right top, #5c5157, #6c5164, #795275, #825489, #8757a0, #8f66b1, "
+				+ "#9676c1, #9e85d2, #b3a2dd, #c8bee7, #dfdbf0, #f8f8f8);");
 
 
 		lblLogin = new Label();

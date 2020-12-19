@@ -5,55 +5,68 @@ import com.tecleo.model.Produto;
 import javafx.application.Application;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class CarrinhoApp extends Application{
 	
+	private static Stage stage;
 	private AnchorPane pane;
 	private TableView<ItensProperty> tbCarrinho;
 	private TableColumn<ItensProperty, String> columnProduto;
 	private TableColumn<ItensProperty, Double> columnPreco;
 	private Button btExcluirItem, btVoltarVitrine, btConfirmarCompra;
-	private static ObservableList<ItensProperty> listItens;
+	private static ObservableList<ItensProperty> listItens = FXCollections
+			.observableArrayList();;
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	@Override
 	public void start(Stage stageCarrinho) throws Exception {
 		
 		initComponents();
+		initItens();
+		initLayout();
+		initListeners();
 		Scene scene = new Scene(pane);
 		stageCarrinho.setScene(scene);
 		stageCarrinho.show();
+		
+		CarrinhoApp.stage = stageCarrinho;
 		
 	}
 	
 	private void initComponents() {
 		pane = new AnchorPane();
-		pane.setPrefSize(600, 800);
+		pane.setPrefSize(600, 600);
+		pane.setStyle("-fx-background-color: linear-gradient(to right top, #5c5157, #6c5164, #795275, #825489, #8757a0, #8f66b1, "
+				+ "#9676c1, #9e85d2, #b3a2dd, #c8bee7, #dfdbf0, #f8f8f8)");
 		
-		pane.getChildren().addAll();
+		tbCarrinho = new TableView<ItensProperty>();
+		tbCarrinho.setPrefSize(500, 500);
+		tbCarrinho.setItems(listItens);
+		
+		columnProduto = new TableColumn<ItensProperty, String>("Produtos");
+		columnPreco = new TableColumn<ItensProperty, Double>("Preços");
+		
+		columnProduto.setCellValueFactory(
+				new PropertyValueFactory<ItensProperty, String>("produto"));
+		columnPreco.setCellValueFactory(
+				new PropertyValueFactory<ItensProperty, Double>("preco"));
+		
+		tbCarrinho.getColumns().addAll(columnProduto, columnPreco);
+		
+		pane.getChildren().addAll(tbCarrinho);
 	}
 	
 	private void initLayout() {
-		
-	}
-	
-	private void initItens() {
-		
-		for(Produto p : VitrineApp.getCarrinho().getProdutos())
-			listItens.add(new ItensProperty(p.getProduto(), p.getPreco()));
-	}
-	
-	private void initListeners() {
+		tbCarrinho.setLayoutX(50);
+		tbCarrinho.setLayoutY(5);
 		
 	}
 	
@@ -75,7 +88,6 @@ public class CarrinhoApp extends Application{
 		}
 
 		public double getPreco() {
-			System.out.println("ItensProperty de preco");
 			return preco.get();
 		}
 
@@ -84,5 +96,23 @@ public class CarrinhoApp extends Application{
 		}
 
 	}
+	
+	private void initItens() {
+		
+		for (Produto produto : VitrineApp.carrinho.getProdutos()) { 			
+			listItens.add(new ItensProperty(produto.getProduto(), produto.getPreco()));
+		}
+			
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	private void initListeners() {
+		
+	}
+	
+	
 
 }

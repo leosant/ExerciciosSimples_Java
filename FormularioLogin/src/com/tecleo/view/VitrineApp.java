@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class VitrineApp extends Application {
+	
 	private static Stage stage;
 	private AnchorPane pane;
 	private TextField txPesquisa;
@@ -30,7 +31,7 @@ public class VitrineApp extends Application {
 	private TableColumn<ItensProperty, Double> columnPreco;
 	private static ObservableList<ItensProperty> listItens = FXCollections
 			.observableArrayList();
-	private static Carrinho carrinho;
+	public static Carrinho carrinho = new Carrinho();
 
 	public static void memoriaConsumida() {
 
@@ -49,7 +50,6 @@ public class VitrineApp extends Application {
 
 	@Override
 	public void start(Stage stageVitrine) throws Exception {
-		System.out.println("Inicio");
 		memoriaConsumida();
 
 		initComponents();
@@ -72,8 +72,8 @@ public class VitrineApp extends Application {
 
 		pane = new AnchorPane();
 		pane.setPrefSize(800, 600);
-		pane.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 100%,"
-				+ " blue 0%, silver 100%);");
+		pane.setStyle("-fx-background-color: linear-gradient(to right top, #5c5157, #6c5164, #795275, #825489, #8757a0, #8f66b1,"
+				+ " #9676c1, #9e85d2, #b3a2dd, #c8bee7, #dfdbf0, #f8f8f8);");
 
 		txPesquisa = new TextField();
 		txPesquisa.setPromptText("Digite o item para pesquisa");
@@ -82,17 +82,21 @@ public class VitrineApp extends Application {
 		tbVitrine.setPrefSize(780, 550);
 		tbVitrine.setItems(listItens);
 
-		columnProduto = new TableColumn<ItensProperty, String>("Produto");
+		columnProduto = new TableColumn<ItensProperty, String>("Produtos");
 		columnPreco = new TableColumn<ItensProperty, Double>("Preço");
+		
+		columnProduto.setCellValueFactory(
+				new PropertyValueFactory<ItensProperty, String>("produto"));
+		columnPreco.setCellValueFactory(
+				new PropertyValueFactory<ItensProperty, Double>("preco"));
+		
+		//carrinho = new Carrinho();
 
 		tbVitrine.getColumns().addAll(columnProduto, columnPreco);
 
 		pane.getChildren().addAll(txPesquisa, tbVitrine);
 
-		columnProduto.setCellValueFactory(
-				new PropertyValueFactory<ItensProperty, String>("produto"));
-		columnPreco.setCellValueFactory(
-				new PropertyValueFactory<ItensProperty, Double>("preco"));
+		
 
 		carrinho = new Carrinho();
 	}
@@ -137,7 +141,6 @@ public class VitrineApp extends Application {
 		}
 
 		public double getPreco() {
-			System.out.println("ItensProperty de preco");
 			return preco.get();
 		}
 
@@ -203,6 +206,7 @@ public class VitrineApp extends Application {
 	}
 
 	public static void setCarrinho(Carrinho carrinho) {
+		System.out.println("Carrinho set");
 		VitrineApp.carrinho = carrinho;
 	}
 	
