@@ -123,10 +123,10 @@ public class LoginApp extends Application{
 		return stage;
 	}
 
-	private void fecharAplicacao() {
+	private static void fecharAplicacao() {
 		System.exit(0);
 	}
-
+	
 	private void logar() {
 		if(txtLogin.getText().equals("admin") && txtSenha.getText().equals("admin")) {
 			try {

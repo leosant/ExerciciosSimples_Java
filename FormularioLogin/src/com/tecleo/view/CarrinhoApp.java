@@ -1,12 +1,17 @@
 package com.tecleo.view;
 
+import javax.swing.JOptionPane;
+
 import com.tecleo.model.Produto;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -61,13 +66,25 @@ public class CarrinhoApp extends Application{
 		
 		tbCarrinho.getColumns().addAll(columnProduto, columnPreco);
 		
-		pane.getChildren().addAll(tbCarrinho);
+		btExcluirItem = new Button("Remover Item");
+		btVoltarVitrine = new Button("Retornar");
+		btConfirmarCompra = new Button("Confirmar compra");
+		
+		pane.getChildren().addAll(tbCarrinho, btExcluirItem, btVoltarVitrine, btConfirmarCompra);
 	}
 	
 	private void initLayout() {
 		tbCarrinho.setLayoutX(50);
 		tbCarrinho.setLayoutY(5);
 		
+		btExcluirItem.setLayoutX(50);
+		btExcluirItem.setLayoutY(510);
+		
+		btVoltarVitrine.setLayoutX(268);
+		btVoltarVitrine.setLayoutY(510);
+		
+		btConfirmarCompra.setLayoutX(438);
+		btConfirmarCompra.setLayoutY(510);
 	}
 	
 	public class ItensProperty {
@@ -110,7 +127,56 @@ public class CarrinhoApp extends Application{
 	}
 	
 	private void initListeners() {
+		btExcluirItem.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				VitrineApp.carrinho.removeProduto(new Produto(tbCarrinho
+						.getSelectionModel().getSelectedItem().getProduto(),
+						tbCarrinho.getSelectionModel().getSelectedItem().getPreco()));
+				
+				tbCarrinho.getItems().remove(tbCarrinho.getSelectionModel().getSelectedItem());
+			}
+		});
 		
+		btVoltarVitrine.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				CarrinhoApp.getStage().close();
+				ItemApp.getStage().close();
+			}
+		});
+		
+		btConfirmarCompra.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Thread thread = new Thread() {
+					public void run() {
+						try {
+							sleep(3000);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(null, "Compra realizada com sucesso!");
+						Platform.runLater(new Runnable() {
+
+							@Override
+							public void run() {
+								CarrinhoApp.getStage().close();	
+								ItemApp.getStage().close();
+							}
+						});
+					};
+				};
+				
+				thread.start();
+			}
+		});
+		
+		
+	}
+
+	public static Stage getStage() {
+		return stage;
 	}
 	
 	
