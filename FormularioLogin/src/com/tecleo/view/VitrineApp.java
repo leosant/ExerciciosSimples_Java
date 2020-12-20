@@ -31,7 +31,7 @@ public class VitrineApp extends Application {
 	private TableColumn<ItensProperty, Double> columnPreco;
 	private static ObservableList<ItensProperty> listItens = FXCollections
 			.observableArrayList();
-	public static Carrinho carrinho = new Carrinho();
+	private static Carrinho carrinho = new Carrinho();
 
 	public static void memoriaConsumida() {
 
@@ -199,6 +199,12 @@ public class VitrineApp extends Application {
 		});	
 		
 		
+	}
+	
+	
+
+	public static Stage getStage() {
+		return stage;
 	}
 
 	public static Carrinho getCarrinho() {

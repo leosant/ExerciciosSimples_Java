@@ -29,7 +29,7 @@ public class CarrinhoApp extends Application{
 	private TableColumn<ItensProperty, Double> columnPreco;
 	private Button btExcluirItem, btVoltarVitrine, btConfirmarCompra;
 	private static ObservableList<ItensProperty> listItens = FXCollections
-			.observableArrayList();;
+			.observableArrayList();
 	
 	@Override
 	public void start(Stage stageCarrinho) throws Exception {
@@ -55,7 +55,7 @@ public class CarrinhoApp extends Application{
 		tbCarrinho = new TableView<ItensProperty>();
 		tbCarrinho.setPrefSize(500, 500);
 		tbCarrinho.setItems(listItens);
-		
+	
 		columnProduto = new TableColumn<ItensProperty, String>("Produtos");
 		columnPreco = new TableColumn<ItensProperty, Double>("Preços");
 		
@@ -115,11 +115,9 @@ public class CarrinhoApp extends Application{
 	}
 	
 	private void initItens() {
-		
-		for (Produto produto : VitrineApp.carrinho.getProdutos()) { 			
-			listItens.add(new ItensProperty(produto.getProduto(), produto.getPreco()));
-		}
-			
+		for (Produto produto : VitrineApp.getCarrinho().getProdutos()) { 
+				listItens.add(new ItensProperty(produto.getProduto(), produto.getPreco()));
+		}		
 	}
 	
 	public static void main(String[] args) {
@@ -130,7 +128,7 @@ public class CarrinhoApp extends Application{
 		btExcluirItem.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				VitrineApp.carrinho.removeProduto(new Produto(tbCarrinho
+				VitrineApp.getCarrinho().removeProduto(new Produto(tbCarrinho
 						.getSelectionModel().getSelectedItem().getProduto(),
 						tbCarrinho.getSelectionModel().getSelectedItem().getPreco()));
 				

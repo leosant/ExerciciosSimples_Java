@@ -1,5 +1,7 @@
 package com.tecleo.view;
 
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import com.tecleo.model.Produto;
@@ -16,7 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ItemApp extends Application{
-
+	
 	private AnchorPane pane;
 	private ImageView imgItem;
 	private Label lbPreco, lbDescricao;
@@ -79,7 +81,7 @@ public class ItemApp extends Application{
 		btAddCarrinho.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0){
-				VitrineApp.carrinho.addProdutos(produto);
+					VitrineApp.getCarrinho().addProdutos(produto);
 				try {
 					new CarrinhoApp().start(new Stage());
 				} catch (NullPointerException e) {
