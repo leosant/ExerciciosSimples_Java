@@ -39,7 +39,7 @@ public class LoginApp extends Application{
 		initListeners();
 		
 		Scene scene = new Scene(pane);
-		
+		scene.getStylesheets().add("/com/tecleo/view/login.css");
 		primaryStage.setScene(scene);		
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Login - GOLFX");
@@ -48,19 +48,12 @@ public class LoginApp extends Application{
 		LoginApp.stage = primaryStage;
 		
 	}
-
-
-
-
-
-
+	
 	private void initComponents() {
 
 		pane = new AnchorPane();
 		pane.setPrefSize(400, 300);
-		pane.setStyle("-fx-background-color: linear-gradient(to right top, #5c5157, #6c5164, #795275, #825489, #8757a0, #8f66b1, "
-				+ "#9676c1, #9e85d2, #b3a2dd, #c8bee7, #dfdbf0, #f8f8f8);");
-
+		pane.getStyleClass().add("pane");
 
 		lblLogin = new Label();
 		lblLogin.setText("Login: ");
