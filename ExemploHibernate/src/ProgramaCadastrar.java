@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -19,23 +21,17 @@ public class ProgramaCadastrar {
 
 	public static void main(String[] args) {
 		
-		Produto produto1 = new Produto();
-		produto1.setNome("Computador");
-		produto1.setQuantidade(1);
-		
-		Produto produto2 = new Produto();
-		produto2.setNome("Laptop");
-		produto2.setQuantidade(2);
-		
-		Produto produto3 = new Produto();
-		produto3.setNome("Celular");
-		produto3.setQuantidade(5);
+		Scanner teclado = new Scanner(System.in);
+	
+		Produto produto4 = new Produto();
+		System.out.println("Digite o nome do produto a ser inserido: ");
+		produto4.setNome(teclado.nextLine());
+		System.out.println("Digite a quantidade desse produto: ");
+		produto4.setQuantidade(teclado.nextInt());
 		
 		EntityManager em = getEntityManager();
 		em.getTransaction().begin();
-		em.persist(produto1);
-		em.persist(produto2);
-		em.persist(produto3);
+		em.persist(produto4);
 		em.getTransaction().commit();
 		
 		em.close();
