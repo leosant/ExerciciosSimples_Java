@@ -68,8 +68,10 @@ public class LoginApp extends Application{
 		txtSenha.setPromptText("Digite aqui sua senha");
 
 		btEntrar = new Button("Entrar");
+		btEntrar.getStyleClass().add("btEntrar");
 
 		btSair = new Button("Sair");
+		btSair.getStyleClass().add("btSair");
 		
 		pane.getChildren().addAll(lblLogin, txtLogin, lblSenha, txtSenha, btEntrar, btSair);
 	}
