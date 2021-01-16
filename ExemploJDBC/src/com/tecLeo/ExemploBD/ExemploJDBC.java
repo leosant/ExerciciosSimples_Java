@@ -1,6 +1,7 @@
 package com.tecLeo.ExemploBD;
 
 import java.sql.BatchUpdateException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,29 +19,45 @@ public class ExemploJDBC {
 		
 		Connection conexao = null;
 		
+		
+		
 		try {			
-			
+	
 			conexao = DriverManager.getConnection(url, user, senha);
 			
 			System.out.println("Banco de dados: Conectado\n");
 			
 			conexao.setAutoCommit(false);
 			
+			CallableStatement chamada2 = conexao.prepareCall("{call sp_listarClientes()}");
+			CallableStatement chamada = conexao.prepareCall("{call sp_contagemClientes(?)}");
+			
+			chamada.registerOutParameter(1, java.sql.Types.INTEGER);
+			
 			PreparedStatement stmt = conexao.prepareStatement("insert into clientes (nome) values (?)"); 
 					Statement stmt2 = conexao.createStatement();
+					
+			chamada.executeQuery();
+			
+			int total = chamada.getInt(1);
+			
+			System.out.println(total);
 					
 //			stmt.addBatch("insert into clientes values(null 'cliente 1')");
 //			
 //			stmt.executeBatch();
+		
+//			Uma forma mais rápida e ideal para inserir mais dados ao bd		
+//			stmt.setString(1, "Clientete");
+//			stmt.executeUpdate();
+//			
+//			conexao.commit();
+			
+			
+			//ResultSet resultado = stmt.executeQuery("select * from clientes");
+			
+			ResultSet resultado = chamada2.executeQuery();
 					
-			stmt.setString(1, "Clientete");
-			stmt.executeUpdate();
-			
-			conexao.commit();
-			
-			
-			ResultSet resultado = stmt.executeQuery("select * from clientes");
-			
 			/*Outra forma de manter o statement aberto (Não funcionou)
 			stmt.getMoreResults(Statement.KEEP_CURRENT_RESULT);*/
 			
