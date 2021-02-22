@@ -9,9 +9,7 @@ public class Teste {
 	
 	public static void main(String[] args) {
 		
-			
-		
-			System.out.println("Relógio com thread: "+ sdf.format(new Date()));
+			System.out.println("Relï¿½gio com thread: "+ sdf.format(new Date()));
 			System.out.println();
 			
 			//ThreadMinuto tM = new ThreadMinuto();
