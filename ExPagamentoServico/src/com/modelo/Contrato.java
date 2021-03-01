@@ -4,18 +4,16 @@ import java.util.Date;
 
 import com.service.Pagamento;
 
-public class Contrato implements Pagamento{
+public class Contrato{
 	
 	private String nContrato;
 	private Date dataContrato;
 	private Double valorContrato;
-	private int NumParcelamento;
 	
-	public Contrato(String nContrato, Date dataContrato, Double valorContrato, int NumParcelamento) {
+	public Contrato(String nContrato, Date dataContrato, Double valorContrato) {
 		this.nContrato = nContrato;
 		this.dataContrato = dataContrato;
 		this.valorContrato = valorContrato;
-		this.NumParcelamento = NumParcelamento;
 	}
 	
 	public String getnContrato() {
@@ -35,21 +33,5 @@ public class Contrato implements Pagamento{
 	}
 	public void setValorContrato(Double valorContrato) {
 		this.valorContrato = valorContrato;
-	}
-	
-	public int getNumParcelamento() {
-		return NumParcelamento;
-	}
-
-	public void setNumParcelamento(int numParcelamento) {
-		NumParcelamento = numParcelamento;
-	}
-
-	@Override
-	public Double ServiceParcela() {
-		
-		return null;
-	}
-	
-	
+	}	
 }
