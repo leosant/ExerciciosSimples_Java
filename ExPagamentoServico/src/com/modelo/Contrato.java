@@ -1,14 +1,16 @@
 package com.modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
-
-import com.service.Pagamento;
+import java.util.List;
 
 public class Contrato{
 	
 	private String nContrato;
 	private Date dataContrato;
 	private Double valorContrato;
+	
+	private List<Parcelamento> parcelamento = new ArrayList<Parcelamento>();
 	
 	public Contrato(String nContrato, Date dataContrato, Double valorContrato) {
 		this.nContrato = nContrato;
@@ -33,5 +35,9 @@ public class Contrato{
 	}
 	public void setValorContrato(Double valorContrato) {
 		this.valorContrato = valorContrato;
-	}	
+	}
+
+	public List<Parcelamento> getParcelamento() {
+		return parcelamento;
+	}
 }

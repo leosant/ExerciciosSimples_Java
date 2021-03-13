@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="cursoTeste/src"/>
+	<classpathentry kind="src" path="Employee/src"/>
+	<classpathentry kind="src" path="Enumeradores/src"/>
+	<classpathentry kind="src" path="EstoqueBasico/src"/>
+	<classpathentry kind="src" path="ExcecoesExc1/src"/>
+	<classpathentry kind="src" path="ExcecoesExc2/src"/>
+	<classpathentry kind="src" path="Exemplo02Hibernate/src"/>
+	<classpathentry kind="src" path="ExemploHibernate/src"/>
+	<classpathentry kind="src" path="ExemploJDBC/src"/>
+	<classpathentry kind="src" path="exerc01/src"/>
+	<classpathentry kind="src" path="ExManipulandoArquivos/src"/>
+	<classpathentry kind="src" path="ExPagamentoServico/src"/>
+	<classpathentry kind="src" path="FormularioLogin/src"/>
+	<classpathentry kind="src" path="HoraDoSistema/src"/>
+	<classpathentry kind="src" path="LearnThread/src"/>
+	<classpathentry kind="src" path="ManipulandoArquivos/src"/>
+	<classpathentry kind="src" path="Polimorfismo/src"/>
+	<classpathentry kind="src" path="TratamentoExececoes/src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
